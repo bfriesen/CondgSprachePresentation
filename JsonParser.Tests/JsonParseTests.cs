@@ -72,12 +72,7 @@ namespace JsonParser.Tests
             var result = Json.Parse(json);
 
             Assert.That(result, Is.EqualTo(123));
-        }
-
-        [Test]
-        public void Foo()
-        {
-            Assert.That(123.45, Is.EqualTo(123.45M));
+            Assert.That(result, Is.InstanceOf<int>());
         }
 
         [Test, Ignore]
@@ -88,6 +83,7 @@ namespace JsonParser.Tests
             var result = Json.Parse(json);
 
             Assert.That(result, Is.EqualTo(123.45));
+            Assert.That(result, Is.InstanceOf<double>());
         }
     }
 }
