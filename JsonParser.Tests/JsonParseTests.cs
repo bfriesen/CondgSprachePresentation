@@ -73,5 +73,15 @@ namespace JsonParser.Tests
 
             Assert.That(result, Is.EqualTo(123));
         }
+
+        [Test, Ignore]
+        public void NumberWithDecimalPlaceReturnsDouble()
+        {
+            var json = @"123.45";
+
+            var result = Json.Parse(json);
+
+            Assert.That(result, Is.EqualTo(123.45));
+        }
     }
 }
