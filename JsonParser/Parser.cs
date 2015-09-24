@@ -9,10 +9,20 @@ namespace JsonParser
         {
             var literalParser = GetLiteralParser();
             var stringParser = GetStringParser();
+            var numberParser = GetNumberParser();
 
-            var mainParser = literalParser.Or(stringParser);
+            var mainParser = literalParser.Or(stringParser).Or(numberParser);
 
             return mainParser.Parse;
+        }
+
+        private static Parser<object> GetNumberParser()
+        {
+            var intParser =
+                from digits in Parse.Digit.AtLeastOnce().Text()
+                select (object)int.Parse(digits);
+
+            return intParser;
         }
 
         private static Parser<string> GetStringParser()

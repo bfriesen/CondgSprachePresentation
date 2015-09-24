@@ -64,7 +64,7 @@ namespace JsonParser.Tests
             Assert.That(result, Is.EqualTo(@"c:\temp\file.txt"));
         }
 
-        [Test, Ignore]
+        [Test]
         public void NumberWithoutDecimalPlaceReturnsInt()
         {
             var json = @"123";
