@@ -135,7 +135,7 @@ namespace JsonParser.Tests
             Assert.That(result.foo, Is.EqualTo(123));
         }
 
-        [Test, Ignore]
+        [Test]
         public void AnJsonObjectWithMultipleMemberReturnsExpandoObject()
         {
             var json = @"{""foo"":123,""bar"":true,""baz"":false}";
