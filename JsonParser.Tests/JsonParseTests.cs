@@ -76,6 +76,17 @@ namespace JsonParser.Tests
         }
 
         [Test]
+        public void NegativeNumberWithoutDecimalPlaceReturnsInt()
+        {
+            var json = @"-123";
+
+            var result = Json.Parse(json);
+
+            Assert.That(result, Is.EqualTo(-123));
+            Assert.That(result, Is.InstanceOf<int>());
+        }
+
+        [Test]
         public void NumberWithDecimalPlaceReturnsDouble()
         {
             var json = @"123.45";

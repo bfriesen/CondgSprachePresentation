@@ -19,14 +19,16 @@ namespace JsonParser
         private static Parser<object> GetNumberParser()
         {
             var doubleParser =
+                from negative in Parse.Char('-').Optional()
                 from digits in Parse.Digit.AtLeastOnce().Text()
                 from dot in Parse.Char('.')
                 from decimalPlaces in Parse.Digit.AtLeastOnce().Text()
-                select (object)double.Parse(digits + dot + decimalPlaces);
+                select (object)(double.Parse(digits + dot + decimalPlaces) * (negative.IsDefined ? -1 : 1));
 
             var intParser =
+                from negative in Parse.Char('-').Optional()
                 from digits in Parse.Digit.AtLeastOnce().Text()
-                select (object)int.Parse(digits);
+                select (object)(int.Parse(digits) * (negative.IsDefined ? -1 : 1));
 
             return doubleParser.Or(intParser);
         }
