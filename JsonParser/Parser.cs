@@ -18,6 +18,12 @@ namespace JsonParser
 
         private static Parser<object> GetNumberParser()
         {
+            var doubleParser =
+                from digits in Parse.Digit.AtLeastOnce().Text()
+                from dot in Parse.Char('.')
+                from decimalPlaces in Parse.Digit.AtLeastOnce().Text()
+                select (object)double.Parse(digits + dot + decimalPlaces);
+
             var intParser =
                 from digits in Parse.Digit.AtLeastOnce().Text()
                 select (object)int.Parse(digits);
