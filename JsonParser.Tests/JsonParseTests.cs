@@ -163,7 +163,7 @@ namespace JsonParser.Tests
             Assert.That(result.foo.bar, Is.EqualTo(123));
         }
 
-        [Test, Ignore]
+        [Test]
         public void AnEmptyJsonArrayReturnsObjectArray()
         {
             var json = @"[]";
