@@ -121,5 +121,18 @@ namespace JsonParser.Tests
             var dictionary = (IDictionary<string, object>)result;
             Assert.That(dictionary.Count, Is.EqualTo(0));
         }
+
+        [Test, Ignore]
+        public void AnJsonObjectWithOneMemberReturnsExpandoObject()
+        {
+            var json = @"{""foo"":123}";
+
+            var result = Json.Parse(json);
+
+            Assert.That(result, Is.InstanceOf<ExpandoObject>());
+            var dictionary = (IDictionary<string, object>)result;
+            Assert.That(dictionary.Count, Is.EqualTo(1));
+            Assert.That(result.foo, Is.EqualTo(123));
+        }
     }
 }
