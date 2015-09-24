@@ -205,5 +205,16 @@ namespace JsonParser.Tests
 
             Assert.That(result, Is.EqualTo(123));
         }
+
+        [Test]
+        public void WhitespaceAroundControlCharactersIsIgnored()
+        {
+            var json = @"{ ""foo"" : [ true , false ] , ""bar"" : null }";
+
+            var result = Json.Parse(json);
+
+            Assert.That(result.foo, Is.EqualTo(new object[] { true, false }));
+            Assert.That(result.bar, Is.Null);
+        }
     }
 }
