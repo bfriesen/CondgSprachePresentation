@@ -173,5 +173,17 @@ namespace JsonParser.Tests
             Assert.That(result, Is.InstanceOf<object[]>());
             Assert.That(result.Length, Is.EqualTo(0));
         }
+
+        [Test, Ignore]
+        public void AnJsonArrayWithOneItemReturnsObjectArray()
+        {
+            var json = @"[123]";
+
+            var result = Json.Parse(json);
+
+            Assert.That(result, Is.InstanceOf<object[]>());
+            Assert.That(result.Length, Is.EqualTo(1));
+            Assert.That(result[0], Is.EqualTo(123));
+        }
     }
 }
