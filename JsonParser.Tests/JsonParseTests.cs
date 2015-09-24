@@ -195,5 +195,15 @@ namespace JsonParser.Tests
 
             Assert.That(result, Is.EqualTo(123));
         }
+
+        [Test]
+        public void TrailingWhitespaceIsIgnored()
+        {
+            var json = @"123    ";
+
+            var result = Json.Parse(json);
+
+            Assert.That(result, Is.EqualTo(123));
+        }
     }
 }
