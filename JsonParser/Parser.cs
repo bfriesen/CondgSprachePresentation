@@ -28,14 +28,20 @@ namespace JsonParser
 
         private static Parser<object> GetArrayParser(MainParser mainParser)
         {
+            var remainderParser =
+                from comma in Parse.Char(',')
+                from item in Parse.Ref(() => mainParser.Value)
+                select item;
+
             return
                 from openBracket in Parse.Char('[')
                 from item in Parse.Ref(() => mainParser.Value).Optional()
+                from rest in remainderParser.Many()
                 from closeBracket in Parse.Char(']')
-                select GetObjectArray(item);
+                select GetObjectArray(item, rest);
         }
 
-        private static object[] GetObjectArray(IOption<object> item)
+        private static object[] GetObjectArray(IOption<object> item, IEnumerable<object> rest)
         {
             if (!item.IsDefined)
             {
