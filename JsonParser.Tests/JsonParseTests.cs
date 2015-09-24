@@ -122,7 +122,7 @@ namespace JsonParser.Tests
             Assert.That(dictionary.Count, Is.EqualTo(0));
         }
 
-        [Test, Ignore]
+        [Test]
         public void AnJsonObjectWithOneMemberReturnsExpandoObject()
         {
             var json = @"{""foo"":123}";
