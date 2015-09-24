@@ -31,7 +31,8 @@ namespace JsonParser
                 from openQuote in Parse.Char('"')
                 from value in escapedBackslashParser
                     .Or(escapedQuoteParser)
-                    .Or(Parse.CharExcept('"')).Many().Text()
+                    .Or(Parse.CharExcept('"'))
+                    .Many().Text()
                 from closeQuote in Parse.Char('"')
                 select value;
         }
