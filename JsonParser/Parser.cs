@@ -25,6 +25,7 @@ namespace JsonParser
         {
             return
                 from openBrace in Parse.Char('{')
+
                 from closeBrace in Parse.Char('}')
                 select new ExpandoObject();
         }
