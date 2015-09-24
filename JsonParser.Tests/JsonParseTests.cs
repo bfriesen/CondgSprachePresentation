@@ -162,5 +162,16 @@ namespace JsonParser.Tests
             Assert.That(dictionary.Count, Is.EqualTo(1));
             Assert.That(result.foo.bar, Is.EqualTo(123));
         }
+
+        [Test, Ignore]
+        public void AnEmptyJsonArrayReturnsObjectArray()
+        {
+            var json = @"[]";
+
+            var result = Json.Parse(json);
+
+            Assert.That(result, Is.InstanceOf<object[]>());
+            Assert.That(result.Length, Is.EqualTo(0));
+        }
     }
 }
