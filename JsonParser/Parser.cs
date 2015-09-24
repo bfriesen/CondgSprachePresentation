@@ -30,6 +30,11 @@ namespace JsonParser
                 select new ExpandoObject();
         }
 
+        private class Member
+        {
+            
+        }
+
         private static Parser<object> GetNumberParser()
         {
             var doubleParser =
