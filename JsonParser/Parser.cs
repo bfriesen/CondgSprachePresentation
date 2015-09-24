@@ -30,6 +30,7 @@ namespace JsonParser
         {
             return
                 from openBracket in Parse.Char('[')
+
                 from closeBracket in Parse.Char(']')
                 select new object[0];
         }
