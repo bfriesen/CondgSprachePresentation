@@ -30,9 +30,19 @@ namespace JsonParser
         {
             return
                 from openBracket in Parse.Char('[')
-
+                from item in Parse.Ref(() => mainParser.Value).Optional()
                 from closeBracket in Parse.Char(']')
-                select new object[0];
+                select GetObjectArray(item);
+        }
+
+        private static object[] GetObjectArray(IOption<object> item)
+        {
+            if (!item.IsDefined)
+            {
+                return new object[0];
+            }
+
+            return new object[] { item };
         }
 
         private static Parser<object> GetObjectParser(
