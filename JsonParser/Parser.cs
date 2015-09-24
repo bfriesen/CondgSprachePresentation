@@ -32,7 +32,8 @@ namespace JsonParser
 
         private class Member
         {
-            
+            public string Name;
+            public object Value;
         }
 
         private static Parser<object> GetNumberParser()
