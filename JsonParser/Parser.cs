@@ -44,10 +44,12 @@ namespace JsonParser
                 from member in memberParser.Optional()
                 from rest in remainderParser.Many()
                 from closeBrace in Parse.Char('}')
-                select GetExpandoObject(member);
+                select GetExpandoObject(member, rest);
         }
 
-        private static ExpandoObject GetExpandoObject(IOption<Member> member)
+        private static ExpandoObject GetExpandoObject(
+            IOption<Member> member,
+            IEnumerable<Member> rest)
         {
             var expandoObject = new ExpandoObject();
             var dictionary = (IDictionary<string, object>)expandoObject;
@@ -55,6 +57,11 @@ namespace JsonParser
             if (member.IsDefined)
             {
                 dictionary.Add(member.Get().Name, member.Get().Value);
+
+                foreach (var m in rest)
+                {
+                    dictionary.Add(m.Name, m.Value);
+                }
             }
 
             return expandoObject;
