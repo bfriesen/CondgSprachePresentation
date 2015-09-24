@@ -42,7 +42,7 @@ namespace JsonParser
                 return new object[0];
             }
 
-            return new object[] { item };
+            return new object[] { item.Get() };
         }
 
         private static Parser<object> GetObjectParser(
