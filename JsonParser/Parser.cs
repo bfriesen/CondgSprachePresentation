@@ -8,33 +8,48 @@ namespace JsonParser
     {
         public static Func<string, object> GetJsonParser()
         {
+            var mainParser = new MainParser();
+
             var literalParser = GetLiteralParser();
             var stringParser = GetStringParser();
             var numberParser = GetNumberParser();
-            var objectParser = GetObjectParser();
+            var objectParser = GetObjectParser(stringParser, mainParser);
 
-            var mainParser = literalParser
+            mainParser.Value = literalParser
                 .Or(stringParser)
                 .Or(numberParser)
                 .Or(objectParser);
 
-            return mainParser.Parse;
+            return mainParser.Value.Parse;
         }
 
-        private static Parser<object> GetObjectParser()
+        private static Parser<object> GetObjectParser(
+            Parser<string> stringParser,
+            MainParser mainParser)
         {
+            var memberParser =
+                from name in stringParser
+                from colon in Parse.Char(':')
+                from value in Parse.Ref(() => mainParser.Value)
+                select new Member { Name = name, Value = value };
+
             return
                 from openBrace in Parse.Char('{')
-
+                from member in memberParser.Optional()
                 from closeBrace in Parse.Char('}')
                 select new ExpandoObject();
         }
 
-        //private class Member
-        //{
-        //    public string Name;
-        //    public object Value;
-        //}
+        private class MainParser
+        {
+            public Parser<object> Value;
+        }
+
+        private class Member
+        {
+            public string Name;
+            public object Value;
+        }
 
         private static Parser<object> GetNumberParser()
         {
