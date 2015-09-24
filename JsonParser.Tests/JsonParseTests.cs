@@ -53,5 +53,15 @@ namespace JsonParser.Tests
 
             Assert.That(result, Is.EqualTo(@"""Ow."" -my pancreas"));
         }
+
+        [Test, Ignore]
+        public void StringWithEscapedBackslashReturnsString()
+        {
+            var json = @"""c:\\temp\\file.txt""";
+
+            var result = Json.Parse(json);
+
+            Assert.That(result, Is.EqualTo(@"c:\temp\file.txt"));
+        }
     }
 }
