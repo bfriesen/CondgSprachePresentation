@@ -22,7 +22,8 @@ namespace JsonParser
                 .Or(stringParser)
                 .Or(numberParser)
                 .Or(objectParser)
-                .Or(arrayParser);
+                .Or(arrayParser)
+                .Token();
 
             return mainParser.Value.Parse;
         }

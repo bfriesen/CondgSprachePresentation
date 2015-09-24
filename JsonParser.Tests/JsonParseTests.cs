@@ -185,5 +185,15 @@ namespace JsonParser.Tests
             Assert.That(result.Length, Is.EqualTo(1));
             Assert.That(result[0], Is.EqualTo(123));
         }
+
+        [Test]
+        public void LeadingWhitespaceIsIgnored()
+        {
+            var json = @"    123";
+
+            var result = Json.Parse(json);
+
+            Assert.That(result, Is.EqualTo(123));
+        }
     }
 }
