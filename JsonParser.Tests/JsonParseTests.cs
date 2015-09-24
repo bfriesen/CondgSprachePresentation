@@ -64,14 +64,14 @@ namespace JsonParser.Tests
             Assert.That(result, Is.EqualTo(@"c:\temp\file.txt"));
         }
 
-        [Test]
+        [Test, Ignore]
         public void NumberWithoutDecimalPlaceReturnsInt()
         {
-            var json = @"""c:\\temp\\file.txt""";
+            var json = @"123";
 
             var result = Json.Parse(json);
 
-            Assert.That(result, Is.EqualTo(@"c:\temp\file.txt"));
+            Assert.That(result, Is.EqualTo(123));
         }
     }
 }
