@@ -28,7 +28,7 @@ namespace JsonParser
                 from digits in Parse.Digit.AtLeastOnce().Text()
                 select (object)int.Parse(digits);
 
-            return intParser;
+            return doubleParser.Or(intParser);
         }
 
         private static Parser<string> GetStringParser()
