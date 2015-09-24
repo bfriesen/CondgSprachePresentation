@@ -216,5 +216,19 @@ namespace JsonParser.Tests
             Assert.That(result.foo, Is.EqualTo(new object[] { true, false }));
             Assert.That(result.bar, Is.Null);
         }
+
+        [Test]
+        public void IllegalCSharpPropertiesAreAllowed()
+        {
+            var json = @"{ ""
+	foo   "" : 123 }";
+
+            var result = Json.Parse(json);
+
+            var dictionary = (IDictionary<string, object>)result;
+
+            Assert.That(dictionary[@"
+	foo   "], Is.EqualTo(123));
+        }
     }
 }
