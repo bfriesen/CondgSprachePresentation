@@ -30,11 +30,11 @@ namespace JsonParser
                 select new ExpandoObject();
         }
 
-        private class Member
-        {
-            public string Name;
-            public object Value;
-        }
+        //private class Member
+        //{
+        //    public string Name;
+        //    public object Value;
+        //}
 
         private static Parser<object> GetNumberParser()
         {
