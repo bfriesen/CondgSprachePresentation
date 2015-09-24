@@ -34,9 +34,10 @@ namespace JsonParser
                 from value in Parse.Ref(() => mainParser.Value)
                 select new Member { Name = name, Value = value };
 
-            var remainderParser = (from comma in Parse.Char(',')
-                from m in memberParser
-                select m);
+            var remainderParser =
+                from comma in Parse.Char(',')
+                from member in memberParser
+                select member;
 
             return
                 from openBrace in Parse.Char('{')
