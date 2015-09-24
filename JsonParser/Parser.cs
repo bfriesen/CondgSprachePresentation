@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Dynamic;
+using System.Linq;
 using Sprache;
 
 namespace JsonParser
@@ -48,7 +49,7 @@ namespace JsonParser
                 return new object[0];
             }
 
-            return new object[] { item.Get() };
+            return new[] { item.Get() }.Concat(rest).ToArray();
         }
 
         private static Parser<object> GetObjectParser(
