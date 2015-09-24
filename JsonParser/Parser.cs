@@ -34,13 +34,14 @@ namespace JsonParser
                 from value in Parse.Ref(() => mainParser.Value)
                 select new Member { Name = name, Value = value };
 
+            var remainderParser = (from comma in Parse.Char(',')
+                from m in memberParser
+                select m);
+
             return
                 from openBrace in Parse.Char('{')
                 from member in memberParser.Optional()
-                from rest in
-                    (from comma in Parse.Char(',')
-                     from m in memberParser
-                     select m).Many()
+                from rest in remainderParser.Many()
                 from closeBrace in Parse.Char('}')
                 select GetExpandoObject(member);
         }
