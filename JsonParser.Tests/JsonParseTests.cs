@@ -1,4 +1,6 @@
-﻿using NUnit.Framework;
+﻿using System.Collections.Generic;
+using System.Dynamic;
+using NUnit.Framework;
 
 namespace JsonParser.Tests
 {
@@ -106,6 +108,18 @@ namespace JsonParser.Tests
 
             Assert.That(result, Is.EqualTo(-123.45));
             Assert.That(result, Is.InstanceOf<double>());
+        }
+
+        [Test, Ignore]
+        public void AnEmptyJsonObjectReturnsExpandoObject()
+        {
+            var json = @"{}";
+
+            var result = Json.Parse(json);
+
+            Assert.That(result, Is.InstanceOf<ExpandoObject>());
+            var dictionary = (IDictionary<string, object>)result;
+            Assert.That(dictionary.Count, Is.EqualTo(0));
         }
     }
 }
