@@ -37,6 +37,10 @@ namespace JsonParser
             return
                 from openBrace in Parse.Char('{')
                 from member in memberParser.Optional()
+                from rest in
+                    (from comma in Parse.Char(',')
+                     from m in memberParser
+                     select m).Many()
                 from closeBrace in Parse.Char('}')
                 select GetExpandoObject(member);
         }
