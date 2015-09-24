@@ -20,7 +20,11 @@ namespace JsonParser
                 from t in Parse.String("true")
                 select (object)true;
 
-            return trueParser;
+            var falseParser =
+                from f in Parse.String("false")
+                select (object)false;
+
+            return trueParser.Or(falseParser);
         }
     }
 }
